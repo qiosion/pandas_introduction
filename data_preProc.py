@@ -13,7 +13,7 @@ print(df_titanic['deck'].value_counts(dropna=False))
 # isnull() : 누락데이터면 True 반환. 유효 데이터가 존재하면 False 반환
 print(df_titanic.head().isnull())
 print("all >>>")
-print(df_titanic.isnull().all())
+print(df_titanic.isnull().all()) # 모든 컬럼이 null 이어야 함
 print("any >>>")
 print(df_titanic.isnull().any())
 print("df에 하나라도 NaN이 있으면 True를 반환하고 싶을 때 >>>")
@@ -24,6 +24,7 @@ print(df_titanic.isnull().any().any())
 print(df_titanic.isnull().sum())
 print(df_titanic.isnull().sum(axis=0)) # col 기준
 print(df_titanic.isnull().sum(axis=1)) # row 기준
+# 보통 axis=0 이 행 row 고 axis=1 이 열 col 인데 조심하기 !! sum 더하기라서 칼럼이 축인게 기본인거임
 
 print("count >>>")
 print(df_titanic.count())
@@ -58,9 +59,10 @@ print("NaN을 평균나이로 대체", df_fillna)
 # mask를 사용해서, True인 데이터만 가지고 오고싶음
 df_titanic.embark_town.isnull() # 모든 행에 대해 True 또는 False 로 결과가 나온다
 
+print("여기@@@@@@@@@@@@@@")
 # 데이터 프레임에서 주어진 조건 중 isnull 이 True인 값만 가져온다
 # -> embark_town 이 NaN인 두개의 행만 가져옴
-print(df_titanic[df_titanic.embark_town.isnull()])
+print(df_titanic[df_titanic.embark_town.isnull()]) # 해당되는 인덱스 번호를 알기 위해 마스킹 Masking
 
 df_ffill = df_titanic['embark_town'].fillna(method='ffill')
 print(df_ffill[825:])
