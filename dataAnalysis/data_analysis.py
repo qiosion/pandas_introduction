@@ -4,7 +4,7 @@ import pandas as pd
 pd.set_option('display.max_columns', None)
 
 # header = None 으로 지정할 필요 있음. 데이터 첫줄에 칼럼이 없어서
-df = pd.read_csv("./Data/auto-mpg.csv", header=None)
+df = pd.read_csv("../Data/auto-mpg.csv", header=None)
 
 # 열이름 지정
 df.columns = ["mpg", "cylinders", "displacement", "horsepower",
