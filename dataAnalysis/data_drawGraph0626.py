@@ -32,6 +32,10 @@ plt.show()
 df = pd.read_excel('../Data/시도별 전출입 인구수.xlsx')
 # print(df.head())
 
+# header=None 있으면 경기도가 아닌 타 지역으로의 이동(ex.서울 => 대구)의 경우 리스트 변환이 필요함
+# x = seoul_daegu.index.tolist()  # 인덱스를 리스트로 변환
+# y = seoul_daegu.tolist()  # 값들을 리스트로 변환
+
 plt.style.use('ggplot')
 # print(df.info())
 
@@ -41,12 +45,12 @@ df = df.fillna(method='ffill')
 
 # mask 연산 -> df[df[(조건)]]
 mask = (df['전출지별'] == '서울특별시') & (df['전입지별'] != '서울특별시')
-print('>>> mask.head(25)')
-print(mask.head(25))
+# print('>>> mask.head(25)')
+# print(mask.head(25))
 df_seoul = df[mask]
-print('df_seoul의 길이 : ', len(df_seoul)) # 17
-print('>>> df_seoul.head(10)')
-print(df_seoul.head(10))
+# print('df_seoul의 길이 : ', len(df_seoul)) # 17
+# print('>>> df_seoul.head(10)')
+# print(df_seoul.head(10))
 # df.iloc[19:,:]
 # df.drop(.., axis=0)
 
@@ -54,7 +58,7 @@ df_seoul = df_seoul.drop(['전출지별'], axis=1) # axis=1 -> 칼럼 자체를 
 df_seoul.set_index('전입지별', inplace=True)
 # print(df_seoul.head())
 
-# 서울->경기 유입
+# 서울 ==> 경기 유입
 sr_one = df_seoul.loc['경기도']
 # print(sr_one)
 
@@ -70,19 +74,85 @@ plt.ylabel("이동 인구수")
 plt.legend(labels="서울==>경기", loc="best")
 
 # plt.plot(sr_one)
-plt.plot(sr_one, markersize=5, marker='*', color='olive')
+plt.plot(sr_one, markersize=5, marker='*', color='black')
 
 plt.show()
 
+"""
+왜지???????? 다 똑같은데 왜 대구만 안뜨지??????????????????????????????????????????????????????????????????????????????????????????????
 
 
+# 서울 ==> 대구 인원 가지고 오기
+# seoul_daegu = (df['전출지별'] == '서울특별시') & (df['전입지별'] == '대구광역시')
+seoul_daegu = df_seoul.loc['대구광역시']
 
+# 사이즈 : 튜플 형태. inch(가로, 세로). 1인치 = 2.5cm
+plt.figure(figsize=(10, 6))
 
+plt.title("서울==>대구 이동 인구수")
+plt.xlabel("기간")
+plt.xticks(rotation=90)
+plt.ylabel("이동 인구수")
 
+# 범례지정 legend
+plt.legend(labels="서울==>대구", loc="best")
 
-# df = pd.read_excel("남북한발전전력량.xlsx")
+plt.plot(seoul_daegu, markersize=5, marker='*', color='blue')
 
+plt.show()
 
+"""
 
+# 서울 ==> 충남 이동 인구수
+seoul_chungnam = df_seoul.loc['충청남도']
 
+# 사이즈 : 튜플 형태. inch(가로, 세로). 1인치 = 2.5cm
+plt.figure(figsize=(10, 6))
 
+plt.title("서울==>충남 이동 인구수")
+plt.xlabel("기간")
+plt.xticks(rotation=90)
+plt.ylabel("이동 인구수")
+
+# 범례지정 legend
+plt.legend(labels="서울==>충남", loc="best")
+
+plt.plot(seoul_chungnam, markersize=5, marker='*', color='red')
+
+plt.show()
+
+# 서울 ==> 경북 이동 인구수
+seoul_gyeongbuk = df_seoul.loc['경상북도']
+
+# 사이즈 : 튜플 형태. inch(가로, 세로). 1인치 = 2.5cm
+plt.figure(figsize=(10, 6))
+
+plt.title("서울==>경북 이동 인구수")
+plt.xlabel("기간")
+plt.xticks(rotation=90)
+plt.ylabel("이동 인구수")
+
+# 범례지정 legend
+plt.legend(labels="서울==>경북", loc="best")
+
+plt.plot(seoul_gyeongbuk, markersize=5, marker='*', color='red')
+
+plt.show()
+
+# 서울 ==> 강원도 이동 인구수
+seoul_gangwon = df_seoul.loc['강원도']
+
+# 사이즈 : 튜플 형태. inch(가로, 세로). 1인치 = 2.5cm
+plt.figure(figsize=(10, 6))
+
+plt.title("서울==>강원 이동 인구수")
+plt.xlabel("기간")
+plt.xticks(rotation=90)
+plt.ylabel("이동 인구수")
+
+# 범례지정 legend
+plt.legend(labels="서울==>강원", loc="best")
+
+plt.plot(seoul_gangwon, markersize=5, marker='*', color='red')
+
+plt.show()
