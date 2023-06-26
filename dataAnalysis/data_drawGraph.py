@@ -66,7 +66,7 @@ df_tran.plot.barh(stacked=True, color=["#000000", "#AAAAAA"], ax=axes[1])
 plt.show()
 """
 
-df = pd.read_csv("sell_bike.csv", index_col="자전거매장", encoding="cp949")
+df = pd.read_csv("../Data/sell_bike.csv", index_col="자전거매장", encoding="cp949")
 # print(df)
 
 index = [1, 2, 3, 4, 5, 6]
@@ -107,7 +107,4 @@ plt.ylabel("York")
 plt.ylim(0, 1200)
 
 plt.show()
-
-
-
 
