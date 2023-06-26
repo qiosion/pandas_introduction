@@ -33,8 +33,7 @@ df = pd.read_excel('../Data/시도별 전출입 인구수.xlsx')
 # print(df.head())
 
 # header=None 있으면 경기도가 아닌 타 지역으로의 이동(ex.서울 => 대구)의 경우 리스트 변환이 필요함
-# x = seoul_daegu.index.tolist()  # 인덱스를 리스트로 변환
-# y = seoul_daegu.tolist()  # 값들을 리스트로 변환
+
 
 plt.style.use('ggplot')
 # print(df.info())
@@ -78,10 +77,6 @@ plt.plot(sr_one, markersize=5, marker='*', color='black')
 
 plt.show()
 
-"""
-왜지???????? 다 똑같은데 왜 대구만 안뜨지??????????????????????????????????????????????????????????????????????????????????????????????
-
-
 # 서울 ==> 대구 인원 가지고 오기
 # seoul_daegu = (df['전출지별'] == '서울특별시') & (df['전입지별'] == '대구광역시')
 seoul_daegu = df_seoul.loc['대구광역시']
@@ -97,11 +92,14 @@ plt.ylabel("이동 인구수")
 # 범례지정 legend
 plt.legend(labels="서울==>대구", loc="best")
 
+seoul_daegu = seoul_daegu.replace('-', 0) # 데이터 빈값이 -로 표기되어있어서 오류남
+
+# x = seoul_daegu.index.tolist()  # 인덱스를 리스트로 변환
+# y = seoul_daegu.tolist()  # 값들을 리스트로 변환
+
 plt.plot(seoul_daegu, markersize=5, marker='*', color='blue')
 
 plt.show()
-
-"""
 
 # 서울 ==> 충남 이동 인구수
 seoul_chungnam = df_seoul.loc['충청남도']
